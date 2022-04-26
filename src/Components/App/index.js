@@ -9,6 +9,8 @@ import {
 import ShowAllPosts from '../Post/ShowAllPosts';
 import FullPostViewer from '../Post/FullPostViewer';
 
+import NavBar from '../NavBar';
+
 // Import Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -16,6 +18,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <div className="App">
+      <NavBar/>
       <Router>
         <Routes>
           <Route path="/" element={<ShowAllPosts/>} />
