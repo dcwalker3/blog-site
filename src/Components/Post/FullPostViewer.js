@@ -6,22 +6,24 @@ import {
 
 const axios = require('axios');
 
-export default function FullPostViewer(props) {
+export default function FullPostViewer() {
     const [post, setPost] = useState([]);
-    const [reload, setReload] = useState(false);
+
     const search = new URLSearchParams(useLocation().search);
 
-    
+
 
   useEffect(() => {
     const id = search.get('id');
     axios.get(`http://localhost:4000/post/${id}`)
         .then(res => {
+            let date = new Date(res.data.date);
+            res.data.date = date.toDateString();
             setPost(res.data);
         })
         .catch(err => console.log(err));
 
-  }, [reload]);
+  });
  
   return (
     <div className='post w-75 mt-5'>
@@ -29,7 +31,7 @@ export default function FullPostViewer(props) {
         <div className='post-date'>Created At: {post.date}</div>
         <div className='post-author'>By: {post.author}</div>
         <hr/>
-        <p className='post-body'>{post.body}</p>
+        <div className='post-body'>{post.body}</div>
     </div>
   )
 }

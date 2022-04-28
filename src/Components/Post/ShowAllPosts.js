@@ -9,6 +9,7 @@ export default function ShowAllPosts() {
     const [reload, setReload] = useState(false);
   
     useEffect(() => {
+      
       axios.get('http://localhost:4000/post')
         .then(res => {
           console.log(res)
