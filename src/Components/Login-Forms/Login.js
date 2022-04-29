@@ -24,23 +24,26 @@ export default function Login() {
         setError("");
 
         try{
-            axios.post('http://localhost:4000/auth', {
+            axios.post('http://localhost:4000/auth/login', {
                 email: email,
                 password: password
             })
             .then(res => {
                 setLoading(false);
+                if(res.data.success){
                 
-                // Add token to cookies with httpOnly flag and expiry date
-                const token = res.data.token;
-                const cookieOptions = {
-                    maxAge: 1000 * 60 * 60,
-                    httpOnly: true
-                };
+                // Add refreshToken and accessToken to cookies httpOnly: true
+                const refreshToken = res.data.refreshToken;
+                const accessToken = res.data.accessToken;
 
-                document.cookie = `token=${token}; ${JSON.stringify(cookieOptions)}`;
+                document.cookie = `refreshToken=${refreshToken}; httpOnly`;
+                document.cookie = `accessToken=${accessToken}; httpOnly`;
+
 
                 window.location.href = '/';
+                } else {
+                    setError(res.data.message);
+                }
             })
             .catch(err => {
                 setError(err.response.data.message);
