@@ -40,7 +40,9 @@ export default function Signup() {
             }
         })
         .then((res) => {
-            console.log(res);
+            if(res.status >= 200 && res.status < 300) {
+                window.location.replace('/');
+            }
         })
         .catch((err) => {
             setError(err);

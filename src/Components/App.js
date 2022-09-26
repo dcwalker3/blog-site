@@ -8,10 +8,12 @@ import {
 
 import Login from "./Login-Signup-Forms/Login";
 import Signup from "./Login-Signup-Forms/Signup";
+import NavBar from "./NavBar";
 
 function App() {
   return (
     <div className="App">
+      <NavBar/>
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />

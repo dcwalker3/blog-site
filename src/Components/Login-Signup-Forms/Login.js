@@ -28,10 +28,10 @@ export default function Login() {
             password: passwordRef.current.value
         })
         .then((res) => {
-            if (res.data.success) {
-                console.log(res.data);
-            } else {
-                setMsg(res.data.msg);
+            if(res.status >= 200 && res.status < 300) {
+                // Set User in Local Storage
+                sessionStorage.setItem('user', JSON.stringify(res.data));
+                window.location.replace('/');
             }
         })
         .catch((err) => {
